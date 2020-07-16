@@ -2,6 +2,7 @@ package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,18 +10,17 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "yc_field")
-
-public class Field implements Serializable {
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
+public class Field extends Standard implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ziduan_id;
-
-    //@Column(nullable = false,unique = true)
-    private String ziduan_name;
-
+    @GeneratedValue(generator = "jpa-uuid")
+    @Column(name = "field_id")
+    private String id;
+    @Column(name = "field_name")
+    private String fieldName;
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "quyu_id",referencedColumnName = "quyu_id")
+    @JoinColumn(name = "area_id",referencedColumnName = "area_id")
     private Area area;
 
 }
