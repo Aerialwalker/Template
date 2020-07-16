@@ -1,4 +1,4 @@
-package com.yc.moban.Entity;
+package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -10,8 +10,8 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "yc_quyu")
-public class Quyu implements Serializable {
+@Table(name = "yc_area")
+public class Area implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long quyu_id;
@@ -21,11 +21,9 @@ public class Quyu implements Serializable {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "moban_id",referencedColumnName = "moban_id")
-    private Moban moban;
+    private Template template;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "quyu",cascade = CascadeType.ALL)
-    private List<Ziduan> ziduanList;
-
-
+    @OneToMany(mappedBy = "area",cascade = CascadeType.ALL)
+    private List<Field> fieldList;
 }

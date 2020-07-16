@@ -1,10 +1,10 @@
-package com.yc.moban;
+package com.yc.template;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MobanApplicationTests {
+class TemplateApplicationTests {
 
     @Test
     void contextLoads() {
