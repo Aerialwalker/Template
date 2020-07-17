@@ -26,7 +26,6 @@ public class TemplateController {
     @RequestMapping("/findById/{id}")
     public @ResponseBody List<TemplateDTO> findById( @PathVariable String id){
         return templateService.findById(id);
-
     }
 
 }

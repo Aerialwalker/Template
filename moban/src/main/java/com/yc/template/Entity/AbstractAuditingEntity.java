@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-
-
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity {
@@ -49,7 +47,4 @@ public abstract class AbstractAuditingEntity {
     @Version
     @Column(name = "version")
     private Integer version;
-
-
-
 }

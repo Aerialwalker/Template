@@ -9,19 +9,16 @@ import javax.annotation.Resource;
 
 @Service
 public class FieldMapper {
-    public FieldDTO DTOconverter(Field field){
+    public FieldDTO converterDTO(Field field){
         FieldDTO fieldDTO = new FieldDTO();
         fieldDTO.setFieldName(field.getFieldName());
         fieldDTO.setOrderId(field.getOrderId());
         return fieldDTO;
     }
-
-    public Field DOconverter(FieldDTO fieldDTO){
+    public Field converterDO(FieldDTO fieldDTO){
         Field field = new Field();
         field.setFieldName(fieldDTO.getFieldName());
         field.setOrderId(fieldDTO.getOrderId());
         return field;
-
-
     }
 }

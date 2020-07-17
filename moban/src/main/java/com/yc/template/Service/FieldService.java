@@ -36,7 +36,7 @@ public class FieldService {
     List<Field> list = fieldRepository.findAll(spec);
     List<FieldDTO> listDTO = new ArrayList();
     for(Field field : list){
-        listDTO.add(fieldMapper.DTOconverter(field));
+        listDTO.add(fieldMapper.converterDTO(field));
     }
     return listDTO;
     }
