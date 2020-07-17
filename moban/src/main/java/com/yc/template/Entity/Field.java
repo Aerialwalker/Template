@@ -10,17 +10,15 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "yc_field")
-@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class Field extends Standard implements Serializable {
-    @Id
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(name = "field_id")
-    private String id;
+public class Field extends AbstractAuditingEntity implements Serializable {
     @Column(name = "field_name")
     private String fieldName;
+
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "area_id",referencedColumnName = "area_id")
+    @JoinColumn(name = "area_id",referencedColumnName = "id")
     private Area area;
 
+    @Column(name = "order_id")
+    private long orderId;
 }

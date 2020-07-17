@@ -12,21 +12,20 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "yc_area")
-@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class Area  extends Standard implements Serializable {
-    @Id
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(name = "area_id")
-    private long areaId;
+public class Area  extends AbstractAuditingEntity implements Serializable {
     @Column(name = "area_name")
     private String areaName;
 
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "template_id",referencedColumnName = "template_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "template_id",referencedColumnName = "id")
     private Template template;
 
     @JsonManagedReference
+    @OrderBy("orderId ASC ")
     @OneToMany(mappedBy = "area",cascade = CascadeType.ALL)
     private List<Field> fieldList;
+
+    @Column(name = "order_id")
+    private long orderId;
 }

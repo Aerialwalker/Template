@@ -1,6 +1,7 @@
 package com.yc.template.Controller;
 
 import com.yc.template.Entity.Field;
+import com.yc.template.Service.DTO.FieldDTO;
 import com.yc.template.Service.FieldService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class FieldController {
     public FieldService fieldService;
 
     @RequestMapping("/findx")
-    public @ResponseBody List<Field> findx(@RequestParam String find){
+    public @ResponseBody List<FieldDTO> findx(@RequestParam String find){
         return fieldService.Findx(find);
     }
 
