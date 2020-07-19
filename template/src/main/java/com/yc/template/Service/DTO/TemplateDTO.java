@@ -1,12 +1,18 @@
 package com.yc.template.Service.DTO;
 
 import com.yc.template.Entity.AreaDO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
+@ApiModel(value = "模板类")
 public class TemplateDTO {
+    @ApiModelProperty(value ="模板名")
     private String templateName;
+    @ApiModelProperty("模板描述")
     private String discription;
+    @ApiModelProperty("区域")
     private List<AreaDO> areaList;
 
     public String getTemplateName() {

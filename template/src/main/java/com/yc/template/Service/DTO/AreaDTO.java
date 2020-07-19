@@ -2,13 +2,18 @@ package com.yc.template.Service.DTO;
 
 import com.yc.template.Entity.FieldDO;
 import com.yc.template.Entity.TemplateDO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
-
+@ApiModel("区域类")
 public class AreaDTO {
+    @ApiModelProperty("区域名")
     private String areaName;
     private TemplateDO template;
+    @ApiModelProperty("字段")
     private List<FieldDO> fieldList;
+    @ApiModelProperty("区排序ID")
     private Integer orderId;
 
     public String getAreaName() {
