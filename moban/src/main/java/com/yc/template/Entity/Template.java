@@ -18,10 +18,15 @@ public class Template extends AbstractAuditingEntity implements Serializable {
 
     private String discription;
 
+    
+
     @JsonManagedReference
     @OrderBy("orderId ASC")
     @OneToMany(mappedBy = "template",cascade = CascadeType.ALL)
     private List<Area> areaList;
+
+
+
 }
 
 

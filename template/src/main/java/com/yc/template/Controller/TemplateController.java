@@ -11,25 +11,26 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api")
 public class TemplateController {
     @Resource
     public TemplateService templateService;
 
-    @GetMapping("/findAll")
+    @GetMapping("/template")
     @ApiOperation("查询所有模板")
     public @ResponseBody List<TemplateDTO> findAll(){
         return templateService.findAll();
     }
 
-    @GetMapping("findById/{id}")
+    @GetMapping("template/id/{id}")
     @ApiOperation("根据ID查询")
     public @ResponseBody List<TemplateDTO> findById(@ApiParam("要查询的ID") @PathVariable String id){
         return templateService.findById(id);
     }
 
-    @GetMapping("/findX")
+    @GetMapping("/template/{name}")
     @ApiOperation("模糊查询")
-    public @ResponseBody List<TemplateDTO> findAll(@ApiParam("要查询的字段") @RequestParam String name){
+    public @ResponseBody List<TemplateDTO> findAll(@ApiParam("要查询的字段") @PathVariable String name){
         return templateService.findAll(name);
     }
 

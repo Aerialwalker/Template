@@ -14,4 +14,5 @@ public class TemplateDTO {
     private List<Area> areaList;
 
 
+
 }

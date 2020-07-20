@@ -2,6 +2,8 @@ package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
+import io.swagger.models.auth.In;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,9 +17,12 @@ public class TemplateDO extends AbstractAuditingEntity implements Serializable {
 
     private String discription;
 
+    @Formula("(select count(a.id) from template.yc_area as a where a.template_id=id )")
+    private Integer areaCount;
+
     @JsonManagedReference
     @OrderBy("orderId ASC")
-    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<AreaDO> areaList;
 
     public String getTemplateName() {
@@ -42,5 +47,13 @@ public class TemplateDO extends AbstractAuditingEntity implements Serializable {
 
     public void setAreaList(List<AreaDO> areaList) {
         this.areaList = areaList;
+    }
+
+    public Integer getAreaCount() {
+        return areaCount;
+    }
+
+    public void setAreaCount(Integer areaCount) {
+        this.areaCount = areaCount;
     }
 }

@@ -14,6 +14,7 @@ public class TemplateDTO {
     private String discription;
     @ApiModelProperty("区域")
     private List<AreaDO> areaList;
+    private Integer areaCount;
 
     public String getTemplateName() {
         return templateName;
@@ -37,5 +38,13 @@ public class TemplateDTO {
 
     public void setAreaList(List<AreaDO> areaList) {
         this.areaList = areaList;
+    }
+
+    public Integer getAreaCount() {
+        return areaCount;
+    }
+
+    public void setAreaCount(Integer areaCount) {
+        this.areaCount = areaCount;
     }
 }

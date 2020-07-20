@@ -11,6 +11,7 @@ public class TemplateMapper {
         templateDTO.setTemplateName(templateDO.getTemplateName());
         templateDTO.setDiscription(templateDO.getDiscription());
         templateDTO.setAreaList(templateDO.getAreaList());
+        templateDTO.setAreaCount(templateDO.getAreaCount());
         return templateDTO;
     }
 
@@ -19,6 +20,7 @@ public class TemplateMapper {
         templateDO.setTemplateName(templateDTO.getTemplateName());
         templateDO.setDiscription(templateDTO.getDiscription());
         templateDO.setAreaList(templateDTO.getAreaList());
+        templateDO.setAreaCount(templateDTO.getAreaCount());
         return templateDO;
 
     }

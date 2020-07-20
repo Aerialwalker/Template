@@ -22,14 +22,22 @@ public class AddTest {
     @Test
     public void add(){
         TemplateDO template= new TemplateDO();
-        template.setTemplateName("行程模板");
+        template.setTemplateName("flight");
         template.setDiscription("这是一个行程模板");
         templateRepository.save(template);
 
         TemplateDO template2= new TemplateDO();
-        template2.setTemplateName("简历模板");
+        template2.setTemplateName("resume");
         template2.setDiscription("这是一个简历模板");
         templateRepository.save(template2);
+
+        AreaDO areaDO = new AreaDO();
+        areaDO.setTemplateDO(template);
+        areaDO.setAreaName("飞行信息");
+        areaDO.setOrderId(5);
+        areaRepository.save(areaDO);
+
+
 
         AreaDO area = new AreaDO();
         area.setTemplateDO(template2);
