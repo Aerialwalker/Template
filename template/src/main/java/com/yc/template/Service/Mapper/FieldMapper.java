@@ -1,5 +1,6 @@
 package com.yc.template.Service.Mapper;
 
+import com.yc.template.Entity.AreaDO;
 import com.yc.template.Entity.FieldDO;
 import com.yc.template.Service.DTO.FieldDTO;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,10 @@ public class FieldMapper {
         return fieldDTO;
     }
 
-    public FieldDO converterDO(FieldDTO fieldDTO){
+    public FieldDO converterDO(FieldDTO fieldDTO, AreaDO areaDO){
         FieldDO fieldDO = new FieldDO();
         fieldDO.setFieldName(fieldDTO.getFieldName());
+        fieldDO.setAreaDO(areaDO);
         fieldDO.setOrderId(fieldDTO.getOrderId());
         return fieldDO;
 

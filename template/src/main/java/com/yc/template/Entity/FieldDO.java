@@ -1,7 +1,5 @@
 package com.yc.template.Entity;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,7 +10,7 @@ public class FieldDO extends AbstractAuditingEntity implements Serializable {
     private String fieldName;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id",referencedColumnName = "id")
     private AreaDO areaDO;
 

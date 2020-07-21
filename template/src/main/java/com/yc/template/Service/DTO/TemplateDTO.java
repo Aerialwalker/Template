@@ -11,9 +11,9 @@ public class TemplateDTO {
     @ApiModelProperty(value ="模板名")
     private String templateName;
     @ApiModelProperty("模板描述")
-    private String discription;
+    private String description;
     @ApiModelProperty("区域")
-    private List<AreaDO> areaList;
+    private List<AreaDTO> areaList;
     private Integer areaCount;
 
     public String getTemplateName() {
@@ -24,19 +24,19 @@ public class TemplateDTO {
         this.templateName = templateName;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public List<AreaDO> getAreaList() {
+    public List<AreaDTO> getAreaList() {
         return areaList;
     }
 
-    public void setAreaList(List<AreaDO> areaList) {
+    public void setAreaList(List<AreaDTO> areaList) {
         this.areaList = areaList;
     }
 

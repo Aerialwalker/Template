@@ -10,9 +10,9 @@ import java.util.List;
 public class AreaDTO {
     @ApiModelProperty("区域名")
     private String areaName;
-    private TemplateDO template;
+
     @ApiModelProperty("字段")
-    private List<FieldDO> fieldList;
+    private List<FieldDTO> fieldList;
     @ApiModelProperty("区排序ID")
     private Integer orderId;
 
@@ -24,19 +24,12 @@ public class AreaDTO {
         this.areaName = areaName;
     }
 
-    public TemplateDO getTemplate() {
-        return template;
-    }
 
-    public void setTemplate(TemplateDO template) {
-        this.template = template;
-    }
-
-    public List<FieldDO> getFieldList() {
+    public List<FieldDTO> getFieldList() {
         return fieldList;
     }
 
-    public void setFieldList(List<FieldDO> fieldList) {
+    public void setFieldList(List<FieldDTO> fieldList) {
         this.fieldList = fieldList;
     }
 

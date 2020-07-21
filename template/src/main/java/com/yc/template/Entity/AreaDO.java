@@ -2,6 +2,9 @@ package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.yc.template.Service.DTO.FieldDTO;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,13 +17,14 @@ public class AreaDO extends AbstractAuditingEntity implements Serializable {
     private String areaName;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = TemplateDO.class)
     @JoinColumn(name = "template_id",referencedColumnName = "id")
     private TemplateDO templateDO;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "areaDO",cascade = CascadeType.ALL)
     @OrderBy("orderId ASC")
+    @Fetch(FetchMode.SUBSELECT)
     private List<FieldDO> fieldList;
 
     @Column(name = "order_id")

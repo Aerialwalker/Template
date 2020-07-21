@@ -1,9 +1,10 @@
 package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import io.swagger.annotations.ApiModel;
-import io.swagger.models.auth.In;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,18 +12,28 @@ import java.util.List;
 
 @Entity
 @Table(name = "yc_template")
+@NamedEntityGraph(name ="template.all" ,
+        attributeNodes = {
+        @NamedAttributeNode(value = "areaList")})
+//                ,subgraph = "field.all")},
+//        subgraphs = {
+//        @NamedSubgraph(name = "field.all",
+//                attributeNodes =
+//        @NamedAttributeNode (value = "fieldList"))})
+
 public class TemplateDO extends AbstractAuditingEntity implements Serializable {
     @Column(name="template_name")
     private String templateName;
 
-    private String discription;
+    private String description;
 
     @Formula("(select count(a.id) from template.yc_area as a where a.template_id=id )")
     private Integer areaCount;
 
     @JsonManagedReference
     @OrderBy("orderId ASC")
-    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
     private List<AreaDO> areaList;
 
     public String getTemplateName() {
@@ -33,12 +44,12 @@ public class TemplateDO extends AbstractAuditingEntity implements Serializable {
         this.templateName = templateName;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<AreaDO> getAreaList() {
