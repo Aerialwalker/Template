@@ -8,6 +8,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,10 +23,10 @@ public class AreaDO extends AbstractAuditingEntity implements Serializable {
     private TemplateDO templateDO;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "areaDO",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "areaDO",cascade = CascadeType.ALL,orphanRemoval =true)
     @OrderBy("orderId ASC")
     @Fetch(FetchMode.SUBSELECT)
-    private List<FieldDO> fieldList;
+    private List<FieldDO> fieldList = new ArrayList();
 
     @Column(name = "order_id")
     private Integer orderId;

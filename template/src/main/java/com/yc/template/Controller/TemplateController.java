@@ -1,16 +1,21 @@
 package com.yc.template.Controller;
 
-import com.yc.template.Entity.TemplateDO;
+
+import com.yc.template.Repository.TemplateRepository;
 import com.yc.template.Service.DTO.TemplateDTO;
+import com.yc.template.Service.Mapper.TemplateMapper;
 import com.yc.template.Service.TemplateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+
 
 @Controller
 @RequestMapping("/api")
@@ -32,23 +37,33 @@ public class TemplateController {
 
     @GetMapping("templates/id/{id}")
     @ApiOperation("根据ID查询")
-    public @ResponseBody Set<TemplateDTO> findById(@ApiParam("要查询的ID") @PathVariable String id){
-        return templateService.findById(id);
+    public @ResponseBody List<TemplateDTO> findById(@ApiParam("要查询的ID") @PathVariable String id){
+        List<TemplateDTO> list = Collections.singletonList(templateService.findById(id));
+        return list;
     }
 
-    @PostMapping("template")
+    @PostMapping("/templates")
     @ApiOperation("增加模板")
     public @ResponseBody String postTemplate(@ApiParam("模板名字") @RequestBody TemplateDTO templateDTO ){
         templateService.postTemplate(templateDTO);
         return "saved";
     }
 
-    @DeleteMapping("template/id/{templateId}")
+    @DeleteMapping("templates/{templateId}")
     @ApiOperation("删除模板")
     public @ResponseBody String deleteTemplate(@ApiParam("要删除的ID") @PathVariable String templateId){
         templateService.deleteTemplate(templateId);
         return "deleted";
     }
+
+
+    @PutMapping ("templates/{templateId}")
+    @ApiOperation("更新模板")
+    public @ResponseBody String updateTemplate(@ApiParam("要更新的实体类") @RequestBody TemplateDTO templateDTO){
+        templateService.updateTemplate(templateDTO);
+        return "updated";
+    }
+
 
 
 

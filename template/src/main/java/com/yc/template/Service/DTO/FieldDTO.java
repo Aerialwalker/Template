@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("字段类")
 public class FieldDTO {
+    private String id;
+
     @ApiModelProperty("模板名")
     private String fieldName;
 
@@ -26,5 +28,13 @@ public class FieldDTO {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

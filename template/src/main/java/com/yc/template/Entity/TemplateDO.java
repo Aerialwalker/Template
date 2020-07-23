@@ -1,16 +1,21 @@
 package com.yc.template.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.*;
 
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@DynamicInsert(true)
+@DynamicUpdate()
 @Table(name = "yc_template")
 @NamedEntityGraph(name ="template.all" ,
         attributeNodes = {
@@ -32,9 +37,9 @@ public class TemplateDO extends AbstractAuditingEntity implements Serializable {
 
     @JsonManagedReference
     @OrderBy("orderId ASC")
-    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "templateDO",cascade = CascadeType.ALL,orphanRemoval =true)
     @Fetch(FetchMode.SUBSELECT)
-    private List<AreaDO> areaList;
+    private List<AreaDO> areaList = new ArrayList();
 
     public String getTemplateName() {
         return templateName;

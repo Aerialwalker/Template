@@ -5,14 +5,17 @@ import com.yc.template.Entity.TemplateDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 @ApiModel("区域类")
 public class AreaDTO {
+    private String id;
+
     @ApiModelProperty("区域名")
     private String areaName;
 
     @ApiModelProperty("字段")
-    private List<FieldDTO> fieldList;
+    private List<FieldDTO> fieldList = new ArrayList();
     @ApiModelProperty("区排序ID")
     private Integer orderId;
 
@@ -39,5 +42,13 @@ public class AreaDTO {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

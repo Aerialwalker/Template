@@ -4,16 +4,19 @@ import com.yc.template.Entity.AreaDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ApiModel(value = "模板类")
 public class TemplateDTO {
+
+    private String id;
     @ApiModelProperty(value ="模板名")
     private String templateName;
     @ApiModelProperty("模板描述")
     private String description;
     @ApiModelProperty("区域")
-    private List<AreaDTO> areaList;
+    private List<AreaDTO> areaList = new ArrayList();
     private Integer areaCount;
 
     public String getTemplateName() {
@@ -46,5 +49,13 @@ public class TemplateDTO {
 
     public void setAreaCount(Integer areaCount) {
         this.areaCount = areaCount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

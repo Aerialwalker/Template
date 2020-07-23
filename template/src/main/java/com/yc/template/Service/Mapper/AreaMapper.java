@@ -9,8 +9,7 @@ import com.yc.template.Service.DTO.TemplateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class AreaMapper {
@@ -19,6 +18,7 @@ public class AreaMapper {
 
     public AreaDTO converterDTO(AreaDO areaDO){
         AreaDTO areaDTO = new AreaDTO();
+        areaDTO.setId(areaDO.getId());
         areaDTO.setAreaName(areaDO.getAreaName());
 
         List<FieldDTO> list=new ArrayList();
@@ -38,13 +38,59 @@ public class AreaMapper {
 
         List<FieldDO> list=new ArrayList();
         List<FieldDTO> fieldList = areaDTO.getFieldList();
+        if(fieldList!=null){
         for(FieldDTO fieldDTO:fieldList){
             list.add(fieldMapper.converterDO(fieldDTO,areaDO)) ;
-        }
+        }}
         areaDO.setTemplateDO(templateDO);
         areaDO.setFieldList(list);
         areaDO.setOrderId(areaDTO.getOrderId());
         return areaDO;
-
     }
+
+
+
+
+    public List<AreaDO> updateArea(List<AreaDO> listDO,List<AreaDTO> listDTO,TemplateDO templateDO){
+        Map<String,AreaDO> mapDO = new HashMap<>();
+        for(int i =0;i<listDO.size();i++){
+            mapDO.put(listDO.get(i).getId(),listDO.get(i));
+        }
+        List<AreaDO> newList = new ArrayList();
+        for(int i=0;i<listDTO.size();i++){
+            String dtoId = listDTO.get(i).getId();
+            AreaDO areaDO = mapDO.get(dtoId);
+            AreaDTO areaDTO = listDTO.get(i);
+            if(dtoId==null){
+                newList.add(converterDO(listDTO.get(i), templateDO));
+                continue;
+            }
+            if(mapDO.get(dtoId)==null){
+                newList.add(converterDO(listDTO.get(i), templateDO));
+                continue;
+            }
+            List<FieldDO> listFDO = areaDO.getFieldList();
+            List<FieldDTO> listFDTO = areaDTO.getFieldList();
+
+            if(mapDO.get(dtoId)!=null){
+                mapDO.get(dtoId).setAreaName(areaDTO.getAreaName());
+                mapDO.get(dtoId).setOrderId(areaDTO.getOrderId());
+                mapDO.get(dtoId).setTemplateDO(areaDO.getTemplateDO());
+                fieldMapper.updateField(listFDO,listFDTO,areaDO);
+                newList.add(mapDO.get(dtoId));
+                continue;
+            }
+        }
+        listDO.clear();
+        for (int i = 0; i < newList.size(); i++) {
+            listDO.add(i,newList.get(i));
+        }
+        return listDO;
+    }
+
+
+
+
+
+
 }

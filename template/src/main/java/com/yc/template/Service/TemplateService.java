@@ -1,8 +1,12 @@
 package com.yc.template.Service;
 
 
+import com.yc.template.Entity.AreaDO;
+import com.yc.template.Entity.FieldDO;
 import com.yc.template.Entity.TemplateDO;
 import com.yc.template.Repository.TemplateRepository;
+import com.yc.template.Service.DTO.AreaDTO;
+import com.yc.template.Service.DTO.FieldDTO;
 import com.yc.template.Service.DTO.TemplateDTO;
 import com.yc.template.Service.Mapper.TemplateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +27,20 @@ public class TemplateService {
     @Resource
     public TemplateMapper templateMapper;
 
-    public Set<TemplateDTO> findById(String id){
-        Set<TemplateDO> list = templateRepository.findById(id);
-        Set<TemplateDTO> list1 = new HashSet();
-        for(TemplateDO templateDO:list){
-            list1.add(templateMapper.converterDtoDetail(templateDO));
-        }
-        return list1;
+//    public Set<TemplateDTO> findById(String id){
+//        Set<TemplateDO> list = templateRepository.findById(id);
+//        Set<TemplateDTO> list1 = new HashSet();
+//        for(TemplateDO templateDO:list){
+//            list1.add(templateMapper.converterDtoDetail(templateDO));
+//        }
+//        return list1;
+//    }
+    public TemplateDTO findById(String id){
+        TemplateDO templateDO = templateRepository.findById(id);
+        TemplateDTO templateDTO = templateMapper.converterDtoDetail(templateDO);
+        return templateDTO;
     }
+
 
     public List<TemplateDTO> findAll(String name){
         List<TemplateDTO> list1 = new ArrayList();
@@ -63,6 +73,13 @@ public class TemplateService {
     @Transactional
     public void deleteTemplate(String templateId){
         templateRepository.deleteById(templateId);
+    }
+
+
+    @Transactional
+    public void updateTemplate(TemplateDTO templateDTO){
+       TemplateDO templateDO = templateMapper.updateTemplate(templateDTO);
+       templateRepository.save(templateDO);
     }
 
 
